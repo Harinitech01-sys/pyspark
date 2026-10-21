@@ -2,6 +2,7 @@
 from pyspark.sql import SparkSession
 
 # Step 1: Create a SparkSession
+"""
 spark = SparkSession.builder \
     .appName("MyFirstPySparkApp") \
     .getOrCreate()
@@ -23,4 +24,23 @@ df = spark.createDataFrame(data, columns)
 df.show()
 
 # Step 6: Stop Spark
-spark.stop()
+spark.stop()"""
+from pyspark.sql import SparkSession
+from pyspark.sql.types import StructType, StructField, IntegerType, StringType
+
+spark = SparkSession.builder \
+    .appName("Day2_DataFrame") \
+    .getOrCreate()
+
+
+schema = StructType([
+    StructField("student_id", IntegerType(), True),
+    StructField("student_name", StringType(), True)
+])
+
+data = [(201, "Kavi"), (202, "Priya")]
+
+df = spark.createDataFrame(data, schema)
+
+df.printSchema()
+df.show()
